@@ -1,5 +1,5 @@
-# BiliBili 直播间弹幕
-包括全区礼物广播, 投喂信息, 入场信息, 人气值等  
+# BiliBili 直播间信息流
+包括评论, 醒目留言, 入场信息, 投喂送礼, 全区礼物广播, 总榜排行, 人气值等  
 
 ## 初始化
 `GET` [https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo](https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo)  
