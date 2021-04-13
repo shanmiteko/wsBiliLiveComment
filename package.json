@@ -1,0 +1,17 @@
+{
+  "name": "bili-live-comment-ws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "shanmite",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^7.4.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0"
+  }
+}
