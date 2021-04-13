@@ -5,8 +5,5 @@ const LiveChat = require("./lib/LiveChat");
     LiveChatCLient
         .setRoomId(1)
         .setUid(1)
-        .setMessageHandle((msg) => {
-            console.log(msg);
-        })
         .run();
 })()

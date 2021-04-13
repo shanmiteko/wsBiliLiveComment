@@ -1,6 +1,27 @@
 # BiliBili 直播间弹幕
 包括全区礼物广播, 投喂信息, 入场信息, 人气值等  
 
+## 初始化
+`GET` [https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo](https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo)  
+
+获取所需的参数  
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
+    <tbody>
+        <tr>
+            <td>HostList</td>
+            <td>WebSocket主机列表</td>
+        </tr>
+        <tr>
+            <td>key</td>
+            <td>身份验证</td>
+        </tr>
+    </tbody>
+</table>
+
+连接至WebSocket服务器
+
+## 解码数据
 直播间`WebSocket`传输数据格式
 ```
 Packet Header Format
@@ -56,29 +77,12 @@ Seq ID:  4 bits
 
 Data: ANY bits
 
-  if PV = 0 then Data is UTF-8 Code JSON Format
-  if PV = 2 then Data is Gzip
+  if PV = 0 then Data is utf-8 encoded format json string
+  if PV = 2 then Data is Gzip(deflate)
     Unzip: Data -> Header0 + Data0 + Header1 + Data1 + ...
-      And Data(n) is also UTF-8 Code JSON Format
+      PV in Header(n) is 0
+      Data(n) is also utf-8 encoded format json string
 
 ```
 
-## 初始化
-`GET` [https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo](https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo)  
-
-获取所需的`HostList` `key`  
-
-<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
-    <tbody>
-        <tr>
-            <td>HostList</td>
-            <td>WebSocket主机列表</td>
-        </tr>
-        <tr>
-            <td>key</td>
-            <td>身份识别</td>
-        </tr>
-    </tbody>
-</table>
-
-连接至WebSocket服务器
+## 展示信息
