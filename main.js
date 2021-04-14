@@ -9,6 +9,7 @@ const LiveChat = require("./lib/live_chat");
             console.log(JSON.stringify(msg))
         })
         .run();
+
     process.stdin.on('data', (data) => {
         const stdin = data.toString().trim();
         switch (stdin) {
