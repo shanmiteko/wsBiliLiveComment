@@ -1,8 +1,8 @@
-const LiveChat = require("./lib/LiveChat");
+const LiveChat = require("./lib/live_chat");
 
 (function () {
-    const LiveChatCLient = new LiveChat();
-    LiveChatCLient
+    const chat_client = new LiveChat();
+    chat_client
         .setRoomId(1)
         .setUid(1)
         .setMessageHandle((msg) => {
@@ -13,10 +13,10 @@ const LiveChat = require("./lib/LiveChat");
         const stdin = data.toString().trim();
         switch (stdin) {
             case 'c':
-                LiveChatCLient.close();
+                chat_client.close();
                 break;
             case 'r':
-                LiveChatCLient.run();
+                chat_client.run();
                 break;
             case 'q':
                 process.exit(0);

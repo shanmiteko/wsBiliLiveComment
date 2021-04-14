@@ -41,11 +41,13 @@ PL:  4 bits
 
   Packet Length
 
+
 HL:  2 bits
 
   Header Length
 
     16 - HEADER_TOTAL_LENGTH
+
 
 PV:  2 bits
 
@@ -53,7 +55,7 @@ PV:  2 bits
   
     1 - HEADER_DEFAULT_VERSION
     0 - BODY_PROTOCOL_VERSION_NORMAL
-    2 - BODY_PROTOCOL_VERSION_DEFLATE
+    2 - BODY_PROTOCOL_VERSION_DEFLATE
 
 
 Op:  4 bits
@@ -61,11 +63,11 @@ Op:  4 bits
   Operation
 
     1 - HEADER_DEFAULT_OPERATION
-    2 - OP_HEARTBEAT
-    3 - OP_HEARTBEAT_REPLY
-    5 - OP_MESSAGE
-    7 - OP_USER_AUTHENTICATION
-    8 - OP_CONNECT_SUCCESS
+    2 - HEARTBEAT
+    3 - HEARTBEAT_REPLY
+    5 - MESSAGE
+    7 - USER_AUTHENTICATION
+    8 - CONNECT_SUCCESS
 
 
 Seq ID:  4 bits
@@ -80,8 +82,7 @@ Data: ANY bits
   if PV = 0 then Data is utf-8 encoded format json string
   if PV = 2 then Data is Gzip(deflate)
     Unzip: Data -> Header0 + Data0 + Header1 + Data1 + ...
-      PV in Header(n) is 0
-      Data(n) is also utf-8 encoded format json string
+      Here, in header(n) the value of the PV field is 0
 
 ```
 
