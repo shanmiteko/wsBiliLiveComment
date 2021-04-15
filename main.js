@@ -4,7 +4,7 @@ const { messageHandle } = require("./lib/message_handle");
 (function () {
     const live_flow = new LiveFlow();
     live_flow
-        .setRoomId(80397)
+        .setRoomId(Number(process.argv[2]) || 1)
         .setMessageHandle((msg) => msg.type === 'MESSAGE' && msg.inner.forEach(messageHandle))
         .run();
 
