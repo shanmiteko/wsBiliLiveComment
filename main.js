@@ -1,23 +1,21 @@
-const LiveChat = require("./lib/live_chat");
+const LiveFlow = require("./lib/live_flow");
+const { messageHandle } = require("./lib/message_handle");
 
 (function () {
-    const chat_client = new LiveChat();
-    chat_client
-        .setRoomId(1)
-        .setUid(1)
-        .setMessageHandle((msg) => {
-            console.log(JSON.stringify(msg))
-        })
+    const live_flow = new LiveFlow();
+    live_flow
+        .setRoomId(80397)
+        .setMessageHandle((msg) => msg.type === 'MESSAGE' && msg.inner.forEach(messageHandle))
         .run();
 
     process.stdin.on('data', (data) => {
         const stdin = data.toString().trim();
         switch (stdin) {
             case 'c':
-                chat_client.close();
+                live_flow.close();
                 break;
             case 'r':
-                chat_client.run();
+                live_flow.run();
                 break;
             case 'q':
                 process.exit(0);
