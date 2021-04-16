@@ -2,9 +2,10 @@
   "name": "bili-live-comment-ws",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "bin": "main.js",
   "scripts": {
-    "start": "node main.js"
+    "start": "node main.js",
+    "pkg": "./node_modules/.bin/pkg . --targets node14-win-x64 --output dist/danmaku"
   },
   "author": "shanmite",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "ws": "^7.4.4"
   },
   "devDependencies": {
-    "eslint": "^7.23.0"
+    "eslint": "^7.23.0",
+    "pkg": "^4.5.1"
   }
 }
