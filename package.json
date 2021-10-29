@@ -2,7 +2,9 @@
   "name": "bili-live-comment-ws",
   "version": "1.0.0",
   "description": "",
-  "bin": "main.js",
+  "bin": {
+    "danmaku": "./bin/danmaku"
+  },
   "scripts": {
     "start": "node main.js",
     "pkg": "./node_modules/.bin/pkg . --targets node14-win-x64 --output dist/danmaku"
@@ -11,7 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.0",
-    "smt-request": "^1.0.1",
     "ws": "^7.4.4"
   },
   "devDependencies": {

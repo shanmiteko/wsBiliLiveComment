@@ -1,10 +1,13 @@
-const LiveFlow = require("./lib/live_flow");
-const { messageHandle } = require("./lib/message_handle");
+#!/usr/bin/env node
+const { LiveFlow, messageHandle } = require('../index')
 
-(function () {
-    const live_flow = new LiveFlow();
+const live_flow = new LiveFlow()
+
+const roomid = Number(process.argv[2])
+
+if (roomid) {
     live_flow
-        .setRoomId(Number(process.argv[2]) || 1)
+        .setRoomId(roomid)
         .setMessageHandle((msg) => msg.type === 'MESSAGE' && msg.inner.forEach(messageHandle))
         .run();
 
@@ -21,4 +24,8 @@ const { messageHandle } = require("./lib/message_handle");
                 process.exit(0);
         }
     })
-})()
+} else {
+    process.stdout.write("Error input: danmaku <直播房间号>\nEnter\n\t'c' to close\n\t'r' to rerun\n\t'q' to quit\n")
+}
+
+
