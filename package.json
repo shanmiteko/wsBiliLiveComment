@@ -1,7 +1,7 @@
 {
   "name": "bili-live-comment-ws",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "包括评论, 醒目留言, 入场信息, 投喂送礼, 全区礼物广播, 总榜排行, 人气值等",
   "bin": {
     "danmaku": "./bin/danmaku"
   },
@@ -12,11 +12,11 @@
   "author": "shanmite",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^4.1.0",
-    "ws": "^7.4.4"
+    "chalk": "latest",
+    "ws": "latest"
   },
   "devDependencies": {
-    "eslint": "^7.23.0",
-    "pkg": "^4.5.1"
+    "eslint": "latest",
+    "pkg": "latest"
   }
 }
