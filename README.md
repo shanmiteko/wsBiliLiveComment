@@ -37,19 +37,19 @@ Packet Header Format
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 
-PL:  4 bits
+PL:  4 Bytes
 
   Packet Length
 
 
-HL:  2 bits
+HL:  2 Bytes
 
   Header Length
 
     16 - HEADER_TOTAL_LENGTH
 
 
-PV:  2 bits
+PV:  2 Bytes
 
   Protocol Version
   
@@ -58,7 +58,7 @@ PV:  2 bits
     2 - BODY_PROTOCOL_VERSION_DEFLATE
 
 
-Op:  4 bits
+Op:  4 Bytes
 
   Operation
 
@@ -70,14 +70,14 @@ Op:  4 bits
     8 - CONNECT_SUCCESS
 
 
-Seq ID:  4 bits
+Seq ID:  4 Bytes
 
   Sequence Id
 
     1 - HEADER_DEFAULT_SEQUENCE
 
 
-Data: ANY bits
+Data: ANY Bytes
 
   if PV = 0 then Data is utf-8 encoded format json string
   if PV = 2 then Data is Gzip(deflate)
