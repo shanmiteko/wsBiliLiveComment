@@ -87,3 +87,19 @@ Data: ANY Bytes
 ```
 
 ## 展示信息
+全局安装
+```
+$ npm i bili-live-comment-ws -g
+```
+使用
+```
+$ danmaku
+```
+更新
+```
+$ npm update -g
+```
+卸载
+```
+$ npm rm bili-live-comment-ws -g
+```
