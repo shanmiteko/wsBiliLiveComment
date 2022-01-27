@@ -51,6 +51,7 @@ if (roomid) {
         switch (stdin) {
             case 'c':
                 live_flow.close();
+                process.exit()
                 break;
         }
     })
