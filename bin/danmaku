@@ -1,5 +1,14 @@
 #!/usr/bin/env node
-const { LiveFlow, messageHandle } = require('../index')
+const chalk = require("chalk");
+const { LiveFlow } = require('../index')
+
+const
+    medal_colors = ['#5CC05C', '#5896DE', '#A068F1', '#FF86B2', '#F6BE18', '#AFC1AF', '#B7C9DE', '#D8C9F0', '#FFE5F0', '#F5E8C1'],
+    user_colors = ['#969696', '#61c05a', '#5896de', '#a068f1', '#ff86b2', '#ff9f3d'];
+
+const
+    medal = (level, name) => chalk.hex(medal_colors[~~((level - 1) / 4)])('[' + name + chalk.dim(level) + ']'),
+    user = (level, name) => chalk.hex(user_colors[~~((level - 1) / 10)])('[UL' + chalk.dim(level) + ']' + name);
 
 const live_flow = new LiveFlow()
 
@@ -8,7 +17,33 @@ const roomid = Number(process.argv[2])
 if (roomid) {
     live_flow
         .setRoomId(roomid)
-        .setMessageHandle((msg) => msg.type === 'MESSAGE' && msg.inner.forEach(messageHandle))
+        .addCommandHandle("DANMU_MSG", ({ info }) => {
+            console.log(
+                '\t'
+                +
+                (info[3].length ? medal(info[3][0], info[3][1]) : '')
+                +
+                ' '
+                +
+                user(info[4][0], info[2][1])
+                +
+                chalk.grey(': ')
+                +
+                chalk.bold.hex(info[2][7] || '#FFFFFF')(info[1])
+            )
+        })
+        .addCommandHandle("INTERACT_WORD", ({ data }) => {
+            const
+                { dmscore, uname, fans_medal } = data,
+                { medal_level, medal_name } = fans_medal
+            console.log(
+                chalk.gray("<进入直播间>")
+                +
+                (medal_name ? medal(medal_level, medal_name) : '')
+                +
+                user(dmscore, uname)
+            )
+        })
         .run();
 
     process.stdin.on('data', (data) => {
@@ -17,15 +52,10 @@ if (roomid) {
             case 'c':
                 live_flow.close();
                 break;
-            case 'r':
-                live_flow.run();
-                break;
-            case 'q':
-                process.exit(0);
         }
     })
 } else {
-    process.stdout.write("Error input: danmaku <直播房间号>\nEnter\n\t'c' to close\n\t'r' to rerun\n\t'q' to quit\n")
+    process.stdout.write("Error input: danmaku <直播房间号>\nEnter\n\t'c' to close")
 }
 
 
