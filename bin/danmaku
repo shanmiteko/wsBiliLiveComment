@@ -12,51 +12,53 @@ const
 
 const live_flow = new LiveFlow()
 
-const roomid = Number(process.argv[2])
+const roomid = Number(process.argv[2]);
 
-if (roomid) {
-    live_flow
-        .setRoomId(roomid)
-        .addCommandHandle("DANMU_MSG", ({ info }) => {
-            console.log(
-                '\t'
-                +
-                (info[3].length ? medal(info[3][0], info[3][1]) : '')
-                +
-                ' '
-                +
-                user(info[4][0], info[2][1])
-                +
-                chalk.grey(': ')
-                +
-                chalk.bold.hex(info[2][7] || '#FFFFFF')(info[1])
-            )
-        })
-        .addCommandHandle("INTERACT_WORD", ({ data }) => {
-            const
-                { dmscore, uname, fans_medal } = data,
-                { medal_level, medal_name } = fans_medal
-            console.log(
-                chalk.gray("<进入直播间>")
-                +
-                (medal_name ? medal(medal_level, medal_name) : '')
-                +
-                user(dmscore, uname)
-            )
-        })
-        .run();
+(async () => {
+    if (roomid) {
+        live_flow
+            .setRoomId(roomid)
+            .addCommandHandle("DANMU_MSG", ({ info }) => {
+                console.log(
+                    '\t'
+                    +
+                    (info[3].length ? medal(info[3][0], info[3][1]) : '')
+                    +
+                    ' '
+                    +
+                    user(info[4][0], info[2][1])
+                    +
+                    chalk.grey(': ')
+                    +
+                    chalk.bold.hex(info[2][7] || '#FFFFFF')(info[1])
+                )
+            })
+            .addCommandHandle("INTERACT_WORD", ({ data }) => {
+                const
+                    { dmscore, uname, fans_medal } = data,
+                    { medal_level, medal_name } = fans_medal
+                console.log(
+                    chalk.gray("<进入直播间>")
+                    +
+                    (medal_name ? medal(medal_level, medal_name) : '')
+                    +
+                    user(dmscore, uname)
+                )
+            })
 
-    process.stdin.on('data', (data) => {
-        const stdin = data.toString().trim();
-        switch (stdin) {
-            case 'c':
-                live_flow.close();
-                process.exit()
-                break;
-        }
-    })
-} else {
-    process.stdout.write("Error input: danmaku <直播房间号>\nEnter\n\t'c' to close")
-}
+        process.stdin.on('data', (data) => {
+            const stdin = data.toString().trim();
+            switch (stdin) {
+                case 'c':
+                    live_flow.close();
+                    break;
+            }
+        })
+        await live_flow.run()
+    } else {
+        process.stdout.write("Error input: danmaku <直播房间号>\nEnter\n\t'c' to close")
+    }
+})()
+
 
 
