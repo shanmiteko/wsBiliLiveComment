@@ -55,6 +55,8 @@ const roomid = Number(process.argv[2]);
             }
         })
         await live_flow.run()
+        // close stdin listener epoll_wait
+        process.stdin.pause()
     } else {
         process.stdout.write("Error input: danmaku <直播房间号>\nEnter\n\t'c' to close")
     }

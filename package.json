@@ -1,6 +1,6 @@
 {
   "name": "bili-live-comment-ws",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "包括评论, 醒目留言, 入场信息, 投喂送礼, 全区礼物广播, 总榜排行, 人气值等",
   "bin": {
     "danmaku": "./bin/danmaku"
