@@ -97,9 +97,9 @@ $ danmaku
 ```
 更新
 ```
-$ npm update -g
+$ npm upgrade -g
 ```
 卸载
 ```
-$ npm rm bili-live-comment-ws -g
+$ npm uninstall bili-live-comment-ws -g
 ```
