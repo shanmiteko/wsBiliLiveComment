@@ -8,7 +8,39 @@ const
 
 const
     medal = (level, name) => chalk.hex(medal_colors[~~((level - 1) / 4)])('[' + name + chalk.dim(level) + ']'),
-    user = (level, name) => chalk.hex(user_colors[~~((level - 1) / 10)])('[UL' + chalk.dim(level) + ']' + name);
+    user = (level, name) => chalk.hex(user_colors[~~((level - 1) / 10)])('[UL' + chalk.dim(level) + ']' + ' ' + name),
+    chat = (color, text) => chalk.bold.hex(color)(text);
+
+function danmu_msg({ info }) {
+    console.log(
+        '\n'
+        +
+        (info[3].length ? medal(info[3][0], info[3][1]) + ' ' : '')
+        +
+        user(info[4][0], info[2][1])
+        +
+        chalk.grey(':')
+        +
+        '\n'
+        +
+        chat(info[2][7] || '#FFFFFF', info[1])
+        +
+        '\n'
+    )
+}
+
+function interact_word({ data }) {
+    const
+        { dmscore, uname, fans_medal } = data,
+        { medal_level, medal_name } = fans_medal
+    console.log(
+        chalk.gray("<进入直播间> ")
+        +
+        (medal_name ? medal(medal_level, medal_name) + ' ' : '')
+        +
+        user(dmscore, uname)
+    )
+}
 
 const live_flow = new LiveFlow()
 
@@ -18,33 +50,8 @@ const roomid = Number(process.argv[2]);
     if (roomid) {
         live_flow
             .setRoomId(roomid)
-            .addCommandHandle("DANMU_MSG", ({ info }) => {
-                console.log(
-                    '\t'
-                    +
-                    (info[3].length ? medal(info[3][0], info[3][1]) : '')
-                    +
-                    ' '
-                    +
-                    user(info[4][0], info[2][1])
-                    +
-                    chalk.grey(': ')
-                    +
-                    chalk.bold.hex(info[2][7] || '#FFFFFF')(info[1])
-                )
-            })
-            .addCommandHandle("INTERACT_WORD", ({ data }) => {
-                const
-                    { dmscore, uname, fans_medal } = data,
-                    { medal_level, medal_name } = fans_medal
-                console.log(
-                    chalk.gray("<进入直播间>")
-                    +
-                    (medal_name ? medal(medal_level, medal_name) : '')
-                    +
-                    user(dmscore, uname)
-                )
-            })
+            .addCommandHandle("DANMU_MSG", danmu_msg)
+            .addCommandHandle("INTERACT_WORD", interact_word)
 
         process.stdin.on('data', (data) => {
             const stdin = data.toString().trim();
@@ -61,6 +68,3 @@ const roomid = Number(process.argv[2]);
         process.stdout.write("Error input: danmaku <直播房间号>\nEnter\n\t'c' to close")
     }
 })()
-
-
-
