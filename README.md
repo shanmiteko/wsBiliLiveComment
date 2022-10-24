@@ -1,6 +1,26 @@
 # BiliBili 直播间信息流
 包括评论, 醒目留言, 入场信息, 投喂送礼, 全区礼物广播, 总榜排行, 人气值等  
 
+## 展示信息
+全局安装
+```
+$ npm i bili-live-comment-ws -g
+```
+使用
+```
+$ danmaku
+```
+更新
+```
+$ npm upgrade -g
+```
+卸载
+```
+$ npm uninstall bili-live-comment-ws -g
+```
+
+# 原理
+
 ## 初始化
 `GET` [https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo](https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo)  
 
@@ -84,22 +104,4 @@ Data: ANY Bytes
     Unzip: Data -> Header0 + Data0 + Header1 + Data1 + ...
       Here, in header(n) the value of the PV field is 0
 
-```
-
-## 展示信息
-全局安装
-```
-$ npm i bili-live-comment-ws -g
-```
-使用
-```
-$ danmaku
-```
-更新
-```
-$ npm upgrade -g
-```
-卸载
-```
-$ npm uninstall bili-live-comment-ws -g
 ```

@@ -7,9 +7,9 @@ const
     user_colors = ['#969696', '#61c05a', '#5896de', '#a068f1', '#ff86b2', '#ff9f3d'];
 
 const
-    medal = (level, name) => chalk.hex(medal_colors[~~((level - 1) / 4)])('[' + name + chalk.dim(level) + ']'),
-    user = (level, name) => chalk.hex(user_colors[~~((level - 1) / 10)])('[UL' + chalk.dim(level) + ']' + ' ' + name),
-    chat = (color, text) => chalk.bold.hex(color)(text);
+    medal = (level, name) => chalk.hex(medal_colors[~~((level - 1) / 4)]).dim('[' + name + level + ']'),
+    user = (level, name) => chalk.hex(user_colors[~~((level - 1) / 10)]).dim('[UL' + level + ']' + ' ' + name),
+    chat = (color, text) => chalk.hex(color).bold(text);
 
 function danmu_msg({ info }) {
     console.log(
@@ -19,9 +19,9 @@ function danmu_msg({ info }) {
         +
         user(info[4][0], info[2][1])
         +
-        chalk.grey(':')
-        +
         '\n'
+        +
+        chalk.gray(': ')
         +
         chat(info[2][7] || '#FFFFFF', info[1])
         +
@@ -34,7 +34,7 @@ function interact_word({ data }) {
         { dmscore, uname, fans_medal } = data,
         { medal_level, medal_name } = fans_medal
     console.log(
-        chalk.gray("<进入直播间> ")
+        chalk.dim.white("<进入直播间> ")
         +
         (medal_name ? medal(medal_level, medal_name) + ' ' : '')
         +
